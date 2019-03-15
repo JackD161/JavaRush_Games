@@ -13,8 +13,10 @@ public class Bullet extends GameObject {
 
     public Bullet(double x, double y, Direction direction) {
         super(x, y);
+
         // создаем пулю по матрице форм объектов
         setMatrix(ShapeMatrix.BULLET);
+
         // инициализируем переменную направления движения
         // если направление передано вверх то пуля полетит вверх
         if (direction.equals(Direction.UP))
@@ -31,7 +33,8 @@ public class Bullet extends GameObject {
     // метод отвечает за движение пули
     public void move()
     {
-        // меняем координату по y  в зависимости от того положительна или отрицательна переменная направления движения
+        // меняем координату по y
+        // в зависимости от того положительна или отрицательна переменная направления движения в ту сторону пуля полетит
         y += dy;
     }
 

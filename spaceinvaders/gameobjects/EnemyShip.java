@@ -4,13 +4,16 @@ import com.javarush.games.spaceinvaders.Direction;
 import com.javarush.games.spaceinvaders.ShapeMatrix;
 
 public class EnemyShip extends Ship {
+    // задаем стоимость корабля в очках
     public int score = 15;
 
+    // базовый конструктор создает экземпляр вражеского корабля и задает ему форму по шаблону
     public EnemyShip(double x, double y) {
         super(x, y);
         setStaticView(ShapeMatrix.ENEMY);
     }
 
+    // метод определяет движение корабля и его скорость
     public void move(Direction direction, double speed)
     {
         // если движение идет вправо то увеличиваем х на переданную скорость
@@ -30,7 +33,7 @@ public class EnemyShip extends Ship {
         }
     }
 
-    // переопределяем родительский метод ведения огня, который возвращает пулю с нужными, по отношению к рораблю, начальными координатами
+    // переопределяем родительский метод ведения огня, который возвращает пулю с нужными, по отношению к кораблю, начальными координатами
     @Override
     public Bullet fire() {
         return new Bullet(x + 1, y + height, Direction.DOWN);
@@ -45,7 +48,7 @@ public class EnemyShip extends Ship {
             // ставим флаг уничтожения корабля
             isAlive = false;
 
-            // передаем слайды анимации
+            // передаем слайды анимации смерти корабля
             setAnimatedView(false, ShapeMatrix.KILL_ENEMY_ANIMATION_FIRST, ShapeMatrix.KILL_ENEMY_ANIMATION_SECOND, ShapeMatrix.KILL_ENEMY_ANIMATION_THIRD);
         }
     }

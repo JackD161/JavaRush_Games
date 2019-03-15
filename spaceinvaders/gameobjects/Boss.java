@@ -5,6 +5,8 @@ import com.javarush.games.spaceinvaders.ShapeMatrix;
 
 public class Boss extends EnemyShip {
     private int frameCount = 0;
+
+    // задаем стоимость в очках босса
     public int score = 100;
 
     // конструктор создает босса и задает его анимацию

@@ -67,7 +67,7 @@ public class Ship extends GameObject {
             frameIndex = 0;
         }
 
-        // смена кадров возможна только если инфекс кадра меньше общего количества кадров с списке
+        // смена кадров возможна только если индекс кадра меньше общего количества кадров с списке
         if (frameIndex < frames.size() && loopAnimation) {
 
             matrix = frames.get(frameIndex);

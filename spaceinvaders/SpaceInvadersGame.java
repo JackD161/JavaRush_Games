@@ -19,7 +19,7 @@ public class SpaceInvadersGame extends Game {
     // переменная для подсчета очков игрока
     private int score;
 
-    // переменная задающая сложность игры
+    // переменная задающая сложность игры (вероятность выстрела вражеского корабля)
     public static final int COMPLEXITY = 5;
 
     // заводим список вражеских пуль

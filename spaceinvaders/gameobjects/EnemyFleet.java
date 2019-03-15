@@ -14,6 +14,8 @@ public class EnemyFleet {
     private static final int ROWS_COUNT = 3;
     private static final int COLUMNS_COUNT = 10;
     private static final int STEP = ShapeMatrix.ENEMY.length + 1;
+
+    // переменная будет хранить вражеские корабли
     private List<EnemyShip> ships;
 
     // устанавливаем начальное направление движения вправо
@@ -34,7 +36,7 @@ public class EnemyFleet {
         ships.add(new Boss(STEP * COLUMNS_COUNT / 2 - ShapeMatrix.BOSS_ANIMATION_FIRST.length / 2 - 1, 5));
     }
 
-    // дефолтный метод создания вражеского флота
+    // базовый метод создания вражеского флота
     public EnemyFleet()
     {
         createShips();
@@ -43,7 +45,7 @@ public class EnemyFleet {
     // метод отрисовки вражеского флота в котором каждый корабль из флота отрисовывается
     public void draw(Game game)
     {
-        for (Ship ship : ships)
+        for (EnemyShip ship : ships)
         {
             ship.draw(game);
         }
@@ -86,7 +88,7 @@ public class EnemyFleet {
     // метод возвращает нижнию границу флота
     public double getBottomBorder()
     {
-        // за минимум берем границу первого корабля и далее с ней сравнимаем границы всех кораблей
+        // за базу берем верхнию границу игровой области
         double bottomBorder = 0;
         Iterator<EnemyShip> iterator = ships.iterator();
         while(iterator.hasNext())
@@ -106,7 +108,7 @@ public class EnemyFleet {
         return ships.size();
     }
 
-    // метод возвращает скорость движения из расчета количества кораблей во флоте
+    // метод возвращает скорость движения из расчета количества кораблей во флоте но не более 2
     private double getSpeed()
     {
         return 2.0 > (3.0 / ships.size()) ? 3.0 / ships.size() : 2.0;
@@ -122,7 +124,7 @@ public class EnemyFleet {
             // если движение текущее влево и флот достиг левого края экрана
             if (direction.equals(Direction.LEFT) && getLeftBorder() < 0)
             {
-                // меняем направление движения на противоположное
+                // меняем направление движения на противоположное всем кораблям
                 direction = Direction.RIGHT;
                 for (EnemyShip ship : ships)
                 {
@@ -132,7 +134,7 @@ public class EnemyFleet {
             // если текущее напраление движения вправо и флот достиг правого края экрана
             else if (direction.equals(Direction.RIGHT) && getRightBorder() > SpaceInvadersGame.WIDTH)
             {
-                // меняем движение на противоположное
+                // меняем движение на противоположное всем кораблям
                 direction = Direction.LEFT;
                 for (EnemyShip ship : ships)
                 {
@@ -141,6 +143,7 @@ public class EnemyFleet {
             }
             else
             {
+                // иначе просто двигаем все корабли в заданном направлении
                 for (EnemyShip ship : ships)
                 {
                     ship.move(direction, speed);
@@ -176,6 +179,7 @@ public class EnemyFleet {
     public int verifyHit(List<Bullet> bullets)
     {
         int hits = 0;
+
         // если пуль нет то возвращаем 0
         if (bullets.size() == 0)
         {

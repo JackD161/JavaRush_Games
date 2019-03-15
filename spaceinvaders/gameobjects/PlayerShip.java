@@ -17,10 +17,10 @@ public class PlayerShip extends Ship {
     }
 
     //заводим направление движения корабля игрока, поскольку он может двигаться влево или вправо или вообще не двигаться
-    // будем использовать для этого направления вверх
+    // для стоянки на месте будем использовать направления вверх
     private Direction direction = Direction.UP;
 
-    // метод устанавливает движение игрока
+    // метод устанавливает движение корабля игрока
     public void setDirection(Direction newDirection)
     {
         // если новое направление не вниз
@@ -32,13 +32,11 @@ public class PlayerShip extends Ship {
     }
 
     // метод возвращает направление движения игрока
-
-
     public Direction getDirection() {
         return direction;
     }
 
-    // переопределяем метод убийства игрока
+    // переопределяем метод смерти игрока
     @Override
     public void kill() {
 
@@ -55,7 +53,7 @@ public class PlayerShip extends Ship {
     // метод проверяет попадания пуль в цель
     public void verifyHit(List<Bullet> bullets)
     {
-        // метод должен работать только если в переданнос списке пуль есть пули
+        // метод должен работать только если в переданном списке пуль есть пули
         if (bullets.size() > 0)
         {
             // работать всё должно только при условии что игрок жив
@@ -114,7 +112,6 @@ public class PlayerShip extends Ship {
     }
 
     // метод отвечающий за выстрелы игрока
-
     @Override
     public Bullet fire() {
         if (!isAlive)
